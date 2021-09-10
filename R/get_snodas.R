@@ -1,5 +1,5 @@
 # snodas ingestion script and conversion to GeoTiff
-# Zach Hoylman 2-18-2021
+# Zach Hoylman 9-7-2021
 
 # snodas help info
 # help https://nsidc.org/support/how/how-do-i-convert-snodas-binary-files-geotiff-or-netcdf
@@ -10,12 +10,7 @@ library(httr)
 library(dplyr)
 library(data.table)
 
-export.dir = '/home/zhoylman/temp/snodas_test/'
-
-date = '2015-01-01' %>% as.Date()
-d = 1
-i = 1
-
+export.dir = '/home/zh192885e/data/'
 
 get_snodas = function(date){
   for(d in 1:length(date)){
@@ -86,4 +81,13 @@ byte order = 1", con = file_to_process %>% gsub(".dat.gz", ".hdr", .))
   }
 }
 
-get_snodas('2015-01-01' %>% as.Date())
+#dates_of_interest = seq('2012-12-21' %>% as.Date(), '2021-09-07' %>% as.Date(), by = 1)
+
+dates_of_interest = c('2012-12-20' %>% as.Date())
+
+
+tictoc::tic()
+
+get_snodas(dates_of_interest)
+
+tictoc::toc()
